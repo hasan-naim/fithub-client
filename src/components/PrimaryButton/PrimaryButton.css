@@ -1,5 +1,6 @@
 .primray-btn {
   /* padding: 12px 16px; */
+  width: fit-content;
   border: unset;
   border-radius: 8px;
   color: #212121;

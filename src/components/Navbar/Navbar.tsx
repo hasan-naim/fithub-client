@@ -80,7 +80,7 @@ function Navbar() {
             >
               {/* <img className="w-6 sm:w-10 mr-2 md:mr-2" src={""} alt="" /> */}
               <span className="sm:text-2xl lg:text-3xl"> 💪 </span>
-              <h1 className="text-xl sm:text-2xl cursor-pointer font-black md:text-2xl lg:text-2xl font-sans text-shadeBlack">
+              <h1 className="text-xl sm:text-2xl cursor-pointer font-black md:text-2xl lg:text-4xl font-sans text-[#282828]">
                 FitHub
               </h1>
             </Link>
@@ -128,6 +128,7 @@ function Navbar() {
                   //   onClick={handleLogOut}
                   txt="Log Out"
                   className="py-2 shadow-none"
+                  shadow={false}
                 ></PrimaryButton>
               </>
             ) : (

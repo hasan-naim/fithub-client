@@ -8,6 +8,7 @@ module.exports = {
       },
       boxShadow: {
         primaryBtnShadow: "4px 8px 19px -3px rgba(0, 0, 0, 0.27)",
+        neumorphismHvr: "7px 7px 23px #c8c8c8 -7px -7px 23px #ffffff",
       },
     },
   },
