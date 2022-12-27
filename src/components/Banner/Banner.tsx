@@ -1,6 +1,8 @@
 import React from "react";
 import BannerGif from "../../assets/banner.gif";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
+// import AnchorLink from "react-anchor-link-smooth-scroll";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 function Banner() {
   return (
@@ -16,12 +18,15 @@ function Banner() {
               weight, reduce the risk of disease, strengthen bones and muscles,
               and improve your ability to do everyday activities.
             </p>
-            <PrimaryButton
-              txt="Explore"
-              bg="white"
-              className="px-12"
-              shadow={true}
-            ></PrimaryButton>
+
+            <a href="#exercises">
+              <PrimaryButton
+                txt="Explore"
+                bg="white"
+                className="px-12"
+                shadow={true}
+              ></PrimaryButton>
+            </a>
           </div>
           <div className="rounded-xl justify-self-center lg:justify-self-end ">
             <img

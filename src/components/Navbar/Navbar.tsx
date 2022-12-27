@@ -16,15 +16,11 @@ function Navbar() {
       <li>
         <Link to={"/"}>Home</Link>
       </li>
+
       <li>
-        <Link to={"/meals"}>Meals</Link>
+        <Link to={"/exercises"}>Exercises</Link>
       </li>
-      <li>
-        <Link to={"/myreviews"}>My Reviews</Link>
-      </li>
-      <li>
-        <Link to={"/addmeal"}>Add Meal</Link>
-      </li>
+
       <li>
         <a
           target={"_blank"}
@@ -76,7 +72,7 @@ function Navbar() {
             </div>
             <Link
               to={"/"}
-              className="translate-y-0 flex items-center duration-300 h-full ml-3 lg:ml-0 hover:bg-white hover:-translate-y-2 hover:cursor-pointer normal-case text-xl"
+              className="translate-y-0 flex items-center duration-300 h-full ml-3 lg:ml-0 hover:bg-white hover:-translate-y-2 hover:cursor-pointer normal-case text-xl gap-1"
             >
               {/* <img className="w-6 sm:w-10 mr-2 md:mr-2" src={""} alt="" /> */}
               <span className="sm:text-2xl lg:text-3xl"> 💪 </span>
