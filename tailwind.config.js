@@ -2,15 +2,25 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        shadeBlack: "#212121",
+      },
+      boxShadow: {
+        primaryBtnShadow: "4px 8px 19px -3px rgba(0, 0, 0, 0.27)",
+      },
+    },
   },
   daisyui: {
     themes: [
       {
         mytheme: {
-          primary: "#1d4ed8",
+          primary: "#212121",
 
-          secondary: "#3b82f6",
+          secondary: "#212121",
+          // primary: "#1d4ed8",
+
+          // secondary: "#3b82f6",
 
           accent: "#059669",
 
