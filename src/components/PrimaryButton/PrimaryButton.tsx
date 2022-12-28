@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import "./PrimaryButton.css";
 
 type prop = {
-  txt: string;
+  txt: string | ReactNode;
   className?: string;
   shadow?: boolean;
   bg?: string;
