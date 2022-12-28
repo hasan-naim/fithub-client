@@ -1,7 +1,10 @@
 import React from "react";
+import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import ExerciseCard from "../ExerciseCard/ExerciseCard";
 
 import Heading from "../Heading/Heading";
+import PrimaryButton from "../PrimaryButton/PrimaryButton";
 
 const data: {
   bodyPart: string;
@@ -68,7 +71,18 @@ function ExercisesSection() {
         <Heading txt="Exercises" />
 
         <div className="grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ExerciseCard />
+          {data.map((exercise) => {
+            return <ExerciseCard key={exercise.id} exerciseData={exercise} />;
+          })}
+        </div>
+        <div className="text-center my-6">
+          <Link
+            to={"/exercises"}
+            className="btn btn-primary flex gap-2 items-center w-fit mx-auto shadow-primaryBtnShadow before:bg-white"
+          >
+            See More
+            <FaArrowRight />
+          </Link>
         </div>
       </div>
     </section>

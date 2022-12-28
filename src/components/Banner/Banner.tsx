@@ -21,7 +21,7 @@ function Banner() {
 
             <a href="#exercises">
               <PrimaryButton
-                txt="Explore"
+                txt={<span className="px-12">Explore</span>}
                 bg="white"
                 className="px-12"
                 shadow={true}

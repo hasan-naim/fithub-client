@@ -4,29 +4,45 @@ import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import { TiPlus } from "react-icons/ti";
 import { FaArrowRight } from "react-icons/fa";
 
-function ExerciseCard() {
+type Prop = {
+  exerciseData: {
+    bodyPart: string;
+    equipment: string;
+    gifUrl: string;
+    id: string;
+    name: string;
+    target: string;
+  };
+};
+
+function ExerciseCard({ exerciseData }: Prop) {
   return (
-    <div className="max-w-sm bg-white rounded-2xl shadow-lg">
-      <div className="w-full h-[284px] overflow-hidden rounded-2xl p-10">
-        <img
-          className="w-full rounded-2xl h-full bg-cover bg-center object-cover hover:scale-[1.2] duration-1000"
-          src="http://d205bpvrqc9yn1.cloudfront.net/0001.gif"
-          alt=""
-          loading="lazy"
-        />
+    <div className="max-w-sm bg-white rounded-2xl shadow-lg hover:shadow-2xl duration-500 hover:-translate-y-2">
+      <div className="p-3">
+        <div className="w-full h-[394px] overflow-hidden rounded-2xl ">
+          <img
+            className="w-full rounded-2xl h-full bg-cover bg-center object-cover hover:scale-[1.2] overflow-hidden duration-1000"
+            src={exerciseData.gifUrl}
+            alt=""
+            loading="lazy"
+          />
+        </div>
       </div>
-      <div className="p-5 bg-white rounded-b-2xl text-left">
-        <h5 className="mb-2 text-2xl font-bold tracking-tigh">3/4 sit-up</h5>
+
+      <div className="p-5 bg-white rounded-b-2xl text-left ">
+        <h5 className="mb-2 text-2xl font-bold tracking-tigh">
+          {exerciseData.name}
+        </h5>
         <p className="mb-2 font-normal text-gray-700">
-          <strong>Body Part:</strong> waist
+          <strong>Body Part:</strong> {exerciseData.bodyPart}
         </p>
         <p className="mb-2 font-normal text-gray-700">
-          <strong>Equipment:</strong> body weight
+          <strong>Equipment:</strong> {exerciseData.equipment}
         </p>
         <p className="mb-2 font-normal text-gray-700">
-          <strong>Target:</strong> abs
+          <strong>Target:</strong> {exerciseData.target}
         </p>
-        <div className="mt-6 flex gap-4 items-center">
+        <div className="mt-auto flex gap-4 items-center">
           <Link to={""} className="btn btn-primary flex gap-2 items-center">
             Details
             <FaArrowRight />
