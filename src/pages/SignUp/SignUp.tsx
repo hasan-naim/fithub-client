@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import { toast } from "react-hot-toast";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 type Input = {
   name: string;
@@ -9,7 +11,13 @@ type Input = {
   img: string;
 };
 
+type Context = {
+  signUp?: Function | undefined;
+};
+
 function SignUp() {
+  const { signUp }: Context = useContext(AuthContext);
+
   const [inputText, setInputText] = useState<Input>({
     name: "",
     email: "",
@@ -19,15 +27,25 @@ function SignUp() {
 
   const [btnDisable, setBtnDisable] = useState(false);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(inputText);
-    setInputText({
-      name: "",
-      email: "",
-      pass: "",
-      img: "",
-    });
+    setBtnDisable(true);
+
+    try {
+      if (signUp) {
+        const { user } = await signUp(inputText.email, inputText.pass);
+
+        setInputText({
+          name: "",
+          email: "",
+          pass: "",
+          img: "",
+        });
+      }
+    } catch (err: any) {
+      toast.error(err.message);
+    }
+    setBtnDisable(false);
   };
 
   return (
