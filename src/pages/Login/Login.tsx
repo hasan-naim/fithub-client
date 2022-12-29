@@ -1,61 +1,59 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+import { toast } from "react-hot-toast";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 type Input = {
-  name: string;
   email: string;
   pass: string;
-  img: string;
+};
+
+type Context = {
+  signUp?: Function | undefined;
 };
 
 function Login() {
+  const { signUp }: Context = useContext(AuthContext);
+
   const [inputText, setInputText] = useState<Input>({
-    name: "",
     email: "",
     pass: "",
-    img: "",
   });
+  const [btnDisable, setBtnDisable] = useState(false);
 
-  const [btnDisable, setBtnDisable] = useState(true);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setBtnDisable(true);
+
+    try {
+      if (signUp) {
+        const { user } = await signUp(inputText.email, inputText.pass);
+
+        setInputText({
+          email: "",
+          pass: "",
+        });
+        setBtnDisable(false);
+        navigate("/");
+      }
+    } catch (err: any) {
+      toast.error(err.message);
+      setBtnDisable(false);
+    }
   };
 
   return (
     <section>
-      <div className="my-12 pt-12">
+      <div className="my-24">
         <div className="container">
-          <div className="w-full max-w-lg bg-white rounded-lg mx-auto p-12">
+          <div className="w-full max-w-lg bg-white rounded-2xl shadow-neumorphismHvr mx-auto p-12">
             <h1 className="text-center text-neutral font-bold text-4xl lg:text-5xl mb-8 font-sans">
-              Sign Up
+              Log In
             </h1>
             <form onSubmit={handleSubmit}>
-              <div className="flex flex-col gap-2 mt-4">
-                <label htmlFor="Email" className="font-medium">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Your Name"
-                  className="input input-bordered w-full bg-white"
-                />
-              </div>
-              <div className="flex flex-col gap-2 mt-4">
-                <label htmlFor="Email" className="font-medium">
-                  Profile Picture
-                </label>
-                <input
-                  value={inputText.img}
-                  onChange={(e) =>
-                    setInputText({ ...inputText, img: e.target.value })
-                  }
-                  type="text"
-                  placeholder="Only Url"
-                  className="input input-bordered w-full bg-white"
-                />
-              </div>
               <div className="flex flex-col gap-2 mt-4">
                 <label htmlFor="Email" className="font-medium">
                   Email
@@ -86,21 +84,20 @@ function Login() {
               </div>
               <div className="mt-2 text-sm">
                 Already Have an account?{" "}
-                <Link to={"/login"} className="text-primary hover:underline">
-                  {" "}
-                  Login.{" "}
+                <Link to={"/signup"} className="text-blue-500 hover:underline">
+                  sign up.
                 </Link>
               </div>
               <div className="mt-6 text-center mx-auto">
                 {btnDisable === false ? (
-                  <button
-                    className="btn btn-primary btn-fit mx-auto"
-                    type="submit"
-                  >
-                    Sign Up
-                  </button>
+                  <PrimaryButton shadow={false} txt={<>Log In</>} />
                 ) : (
-                  <button className="btn loading">loading</button>
+                  <button
+                    style={{ backgroundColor: "#ddd" }}
+                    className="btn loading btn-disabled"
+                  >
+                    Log In
+                  </button>
                 )}
               </div>
             </form>
