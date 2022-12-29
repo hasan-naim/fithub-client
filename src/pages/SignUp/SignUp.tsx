@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
@@ -25,8 +25,9 @@ function SignUp() {
     pass: "",
     img: "",
   });
-
   const [btnDisable, setBtnDisable] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -45,11 +46,13 @@ function SignUp() {
           pass: "",
           img: "",
         });
+        setBtnDisable(false);
+        navigate("/");
       }
     } catch (err: any) {
       toast.error(err.message);
+      setBtnDisable(false);
     }
-    setBtnDisable(false);
   };
 
   return (
@@ -129,7 +132,12 @@ function SignUp() {
                 {btnDisable === false ? (
                   <PrimaryButton shadow={false} txt={<>Sign Up</>} />
                 ) : (
-                  <button className="btn loading btn-disabled">Sign Up</button>
+                  <button
+                    style={{ backgroundColor: "#ddd" }}
+                    className="btn loading btn-disabled"
+                  >
+                    Sign Up
+                  </button>
                 )}
               </div>
             </form>

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
+import { toast } from "react-hot-toast";
 
 type User = {
   photoURL?: string;
@@ -10,7 +11,8 @@ type User = {
 };
 
 function Navbar() {
-  const { user }: { user?: User } = useContext(AuthContext);
+  const { user, logOut }: { user?: User; logOut?: Function } =
+    useContext(AuthContext);
 
   const navItems = (
     <>
@@ -34,13 +36,14 @@ function Navbar() {
     </>
   );
 
-  //   const handleLogOut = () => {
-  //     logOut()
-  //       .then((res) => {
-  //         toast.success("You are successfully loged out!");
-  //       })
-  //       .catch((err) => toast.error(err.message));
-  //   };
+  const handleLogOut = () => {
+    if (logOut)
+      logOut()
+        .then(() => {
+          toast.success("You are successfully loged out!");
+        })
+        .catch((err: any) => toast.error(err.message));
+  };
 
   return (
     <div className="bg-white sticky top-0 left-0 w-full z-10 shadow-md">
@@ -121,12 +124,13 @@ function Navbar() {
                     )}
                   </>
                 )}
-                <PrimaryButton
-                  //   onClick={handleLogOut}
-                  txt="Log Out"
-                  className="py-2 shadow-none"
-                  shadow={false}
-                ></PrimaryButton>
+                <div onClick={handleLogOut}>
+                  <PrimaryButton
+                    txt="Log Out"
+                    className="py-2 shadow-none"
+                    shadow={false}
+                  ></PrimaryButton>
+                </div>
               </>
             ) : (
               <Link to={"/login"} className="btn btn-primary text-white">

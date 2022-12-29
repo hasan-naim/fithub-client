@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
@@ -12,7 +13,7 @@ const auth = getAuth(app);
 
 function AuthProvider({ children }: any) {
   const [user, setUser] = useState<{} | null>({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading]: [boolean, Function] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (crntUser) => {
@@ -42,14 +43,23 @@ function AuthProvider({ children }: any) {
     }
   };
 
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
   const authInfo: {
     user: object | null;
+    loading: boolean;
     signUp: Function;
     updateUser: Function;
+    logOut: Function;
   } = {
     user,
+    loading,
     signUp,
     updateUser,
+    logOut,
   };
 
   return (
