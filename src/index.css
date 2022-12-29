@@ -14,7 +14,7 @@
 }
 
 .btn {
-  /* @apply bg-primary; */
+  @apply bg-primary;
 }
 
 .btn-custom {

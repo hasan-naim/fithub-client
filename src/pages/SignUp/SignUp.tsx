@@ -13,10 +13,11 @@ type Input = {
 
 type Context = {
   signUp?: Function | undefined;
+  updateUser?: Function | undefined;
 };
 
 function SignUp() {
-  const { signUp }: Context = useContext(AuthContext);
+  const { signUp, updateUser }: Context = useContext(AuthContext);
 
   const [inputText, setInputText] = useState<Input>({
     name: "",
@@ -34,6 +35,9 @@ function SignUp() {
     try {
       if (signUp) {
         const { user } = await signUp(inputText.email, inputText.pass);
+        if (updateUser) {
+          await updateUser(inputText.name, inputText.img);
+        }
 
         setInputText({
           name: "",
