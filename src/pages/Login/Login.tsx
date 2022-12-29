@@ -10,11 +10,11 @@ type Input = {
 };
 
 type Context = {
-  signUp?: Function | undefined;
+  logIn?: Function | undefined;
 };
 
 function Login() {
-  const { signUp }: Context = useContext(AuthContext);
+  const { logIn }: Context = useContext(AuthContext);
 
   const [inputText, setInputText] = useState<Input>({
     email: "",
@@ -29,8 +29,8 @@ function Login() {
     setBtnDisable(true);
 
     try {
-      if (signUp) {
-        const { user } = await signUp(inputText.email, inputText.pass);
+      if (logIn) {
+        const { user } = await logIn(inputText.email, inputText.pass);
 
         setInputText({
           email: "",
@@ -38,6 +38,8 @@ function Login() {
         });
         setBtnDisable(false);
         navigate("/");
+
+        toast.success("Successfully Log in.");
       }
     } catch (err: any) {
       toast.error(err.message);
