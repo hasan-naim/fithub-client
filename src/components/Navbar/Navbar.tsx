@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 
-function Navbar() {
-  //   const { user, logOut } = useContext(AuthContext);
+type User = {
+  photoURL?: string;
+  displayName?: string;
+  email?: string;
+};
 
-  const user: { email: string; displayName: string; photoURL: string } = {
-    email: "",
-    displayName: "",
-    photoURL: "",
-  };
+function Navbar() {
+  const { user }: { user?: User } = useContext(AuthContext);
 
   const navItems = (
     <>

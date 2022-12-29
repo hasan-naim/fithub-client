@@ -16,7 +16,7 @@ type ExerciseObject = {
 };
 
 function Exercises() {
-  const { error, data, isLoading, isError, refetch } = useQuery({
+  const { error, data, isLoading, isError } = useQuery({
     queryKey: ["fetchAllExercises"],
     queryFn: async () => {
       const res = await axios.get("http://localhost:5000/allExercises");
@@ -26,7 +26,7 @@ function Exercises() {
 
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [searchTxt, setSearchTxt] = useState<string>("");
-  const [fetchExercises, setFetchExercises] = useState([]);
+  // const [fetchExercises, setFetchExercises] = useState([]);
 
   useEffect(() => {
     window.scroll({ top: 0, behavior: "smooth" });

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import BannerGif from "../../assets/banner.gif";
+import { AuthContext } from "../../Contexts/AuthProvider";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 // import AnchorLink from "react-anchor-link-smooth-scroll";
 // import AnchorLink from "react-anchor-link-smooth-scroll";
