@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import { FcGoogle } from "react-icons/fc";
 
 type Input = {
   email: string;
@@ -45,6 +46,13 @@ function Login() {
       toast.error(err.message);
       setBtnDisable(false);
     }
+  };
+
+  const handleGoogleLogin = async () => {
+    setBtnDisable(true);
+
+    try {
+    } catch (error) {}
   };
 
   return (
@@ -103,6 +111,32 @@ function Login() {
                 )}
               </div>
             </form>
+            <div className="divider">OR</div>
+            {btnDisable === false ? (
+              <div className="flex justify-center items-center">
+                <div onClick={handleGoogleLogin}>
+                  <PrimaryButton
+                    shadow={false}
+                    txt={
+                      <span className="flex gap-2 items-center ju">
+                        Google <FcGoogle className="text-xl font-bold" />
+                      </span>
+                    }
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="flex justify-center items-center">
+                <button
+                  style={{ backgroundColor: "#ddd" }}
+                  className="btn loading btn-disabled"
+                >
+                  <span className="flex gap-2 items-center ju">
+                    Google <FcGoogle className="text-xl font-bold" />
+                  </span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
