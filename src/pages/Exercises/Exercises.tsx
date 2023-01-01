@@ -97,7 +97,7 @@ function Exercises() {
         <div className="container">
           <Heading txt="Exercises" />
           {/* Search Box */}
-          <div className="form-control mb-6 mx-auto text-center ">
+          <div className="form-control mb-6 mx-auto text-center  ">
             <div className="input-group w-fit shadow-primaryBtnShadow mx-auto rounded-lg">
               <input
                 type="text"

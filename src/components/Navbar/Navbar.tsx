@@ -49,7 +49,7 @@ function Navbar() {
   };
 
   return (
-    <div className="bg-white sticky top-0 left-0 w-full z-10 shadow-md">
+    <div className="bg-white sticky top-0 left-0 w-full z-10 shadow-lg">
       <div className="container">
         <div className="navbar p-0">
           <div className="navbar-start">
