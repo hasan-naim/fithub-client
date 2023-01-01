@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import { TiPlus } from "react-icons/ti";
+import { BiAddToQueue } from "react-icons/bi";
 import { FaArrowRight } from "react-icons/fa";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import axios from "axios";
@@ -81,7 +81,7 @@ function ExerciseCard({ exerciseData }: Prop) {
               txt={
                 <span className="flex gap-2 items-center">
                   Add Queue
-                  <TiPlus className="w-5 h-5" />
+                  <BiAddToQueue className="w-6 h-6" />
                 </span>
               }
             />
