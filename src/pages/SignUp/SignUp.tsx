@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { toast } from "react-hot-toast";
@@ -28,6 +28,10 @@ function SignUp() {
   const [btnDisable, setBtnDisable] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();

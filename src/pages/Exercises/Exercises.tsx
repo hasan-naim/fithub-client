@@ -67,14 +67,11 @@ function Exercises() {
         exercise.equipment.toLowerCase().includes(searchTxt)
       );
     });
-    console.log(searchedExercises);
 
     const exercises: ExerciseObject[] = searchedExercises.slice(
       firstExercise,
       lastExercise
     );
-
-    // [1, 2, 3 ,4, 5]
 
     const onPageChange = (prevOrNext: string) => {
       switch (prevOrNext) {
@@ -99,6 +96,7 @@ function Exercises() {
       <main className="mt-6">
         <div className="container">
           <Heading txt="Exercises" />
+          {/* Search Box */}
           <div className="form-control mb-6 mx-auto text-center ">
             <div className="input-group w-fit shadow-primaryBtnShadow mx-auto rounded-lg">
               <input

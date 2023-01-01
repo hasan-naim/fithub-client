@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { toast } from "react-hot-toast";
@@ -12,10 +12,11 @@ type Input = {
 
 type Context = {
   logIn?: Function | undefined;
+  googleLogin?: Function | undefined;
 };
 
 function Login() {
-  const { logIn }: Context = useContext(AuthContext);
+  const { logIn, googleLogin }: Context = useContext(AuthContext);
 
   const [inputText, setInputText] = useState<Input>({
     email: "",
@@ -24,6 +25,10 @@ function Login() {
   const [btnDisable, setBtnDisable] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -52,7 +57,18 @@ function Login() {
     setBtnDisable(true);
 
     try {
-    } catch (error) {}
+      if (googleLogin) {
+        const { user } = await googleLogin();
+
+        navigate("/");
+        setBtnDisable(false);
+        toast.success("You are successfully loged in");
+      }
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err.message);
+      setBtnDisable(false);
+    }
   };
 
   return (

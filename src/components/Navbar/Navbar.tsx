@@ -23,6 +23,9 @@ function Navbar() {
       <li>
         <Link to={"/exercises"}>Exercises</Link>
       </li>
+      <li>
+        <Link to={"/myexercises"}>My Exercises</Link>
+      </li>
 
       <li>
         <a

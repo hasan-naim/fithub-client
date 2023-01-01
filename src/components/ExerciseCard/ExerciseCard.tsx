@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import { TiPlus } from "react-icons/ti";
 import { FaArrowRight } from "react-icons/fa";
+import { AuthContext } from "../../Contexts/AuthProvider";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 type Prop = {
   exerciseData: {
@@ -15,7 +18,33 @@ type Prop = {
   };
 };
 
+type User = {
+  photoURL?: string;
+  displayName?: string;
+  email?: string;
+};
+
 function ExerciseCard({ exerciseData }: Prop) {
+  const { user }: { user?: User } = useContext(AuthContext);
+
+  const handleAddToList = async () => {
+    console.log("clicked", { exerciseData, user });
+
+    try {
+      const { data } = await axios.post(
+        `http://localhost:5000/addExercise?email=${user?.email}`,
+        exerciseData
+      );
+
+      if (data.modifiedCount === 1 || data.insertedId) {
+        toast.success("Exercise Added To Your List");
+      }
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
+
   return (
     <div className="max-w-sm bg-white rounded-2xl shadow-lg hover:shadow-2xl duration-500 hover:-translate-y-2">
       <div className="p-3">
@@ -43,11 +72,11 @@ function ExerciseCard({ exerciseData }: Prop) {
           <strong>Target:</strong> {exerciseData.target}
         </p>
         <div className="mt-auto flex gap-4 items-center">
-          <Link to={""} className="btn btn-primary flex gap-2 items-center">
+          {/*** <Link to={""} className="btn btn-primary flex gap-2 items-center">
             Details
             <FaArrowRight />
-          </Link>
-          <button>
+          </Link> */}
+          <button onClick={handleAddToList}>
             <PrimaryButton
               txt={
                 <span className="flex gap-2 items-center">
