@@ -20,7 +20,7 @@ function MyExercises() {
     queryKey: ["getUserExercises", user],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/exercisesByUser?email=${user?.email}`
+        `https://fithub-server.vercel.app/exercisesByUser?email=${user?.email}`
       );
 
       return data;
@@ -77,7 +77,7 @@ function MyExercises() {
     // [], [{}, {}]
 
     const handleDelete = (id) => {
-      console.log(id);
+      // console.log(id);
 
       // console.log({ data: data });
       // const arrAfterDelete = userAddedData.filter((el) => el._id !== id);
@@ -86,13 +86,33 @@ function MyExercises() {
 
       axios
         .delete(
-          `http://localhost:5000/deleteExerciseByUser?id=${id}&email=${user?.email}`
+          `https://fithub-server.vercel.app/deleteExerciseByUser?id=${id}&email=${user?.email}`
         )
         .then((data) => {
           if (data.data.response === "success") {
             refetch();
             toast.success("Deleted Successfully!");
           }
+        })
+        .catch((err) => {
+          toast.error(err.message);
+          console.log(err);
+        });
+    };
+
+    const handleModify = (id, state) => {
+      console.log({ id, state });
+
+      axios
+        .put(
+          `https://fithub-server.vercel.app/updateExerciseState?id=${id}&email=${user?.email}&state=${state}`
+        )
+        .then((data) => {
+          console.log(data.data);
+          if (data.data.response === "true") {
+            toast.success("Congratulation!");
+          }
+          refetch();
         })
         .catch((err) => {
           toast.error(err.message);
@@ -126,6 +146,7 @@ function MyExercises() {
                         key={exercise.id}
                         queued={true}
                         handleDelete={handleDelete}
+                        handleModify={handleModify}
                       />
                     );
                   })}
@@ -151,6 +172,8 @@ function MyExercises() {
                         exercise={exercise}
                         key={exercise.id}
                         queued={false}
+                        handleDelete={handleDelete}
+                        handleModify={handleModify}
                       />
                     );
                   })}

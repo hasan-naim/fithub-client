@@ -3,21 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 import { IoCheckmarkDone } from "react-icons/io5";
 import { BiAddToQueue } from "react-icons/bi";
 
-type Prop = {
-  exercise: {
-    _id: string;
-    bodyPart: string;
-    equipment: string;
-    gifUrl: string;
-    id: string;
-    name: string;
-    target: string;
-  };
-  queued?: boolean;
-  handleDelete?: any;
-};
-
-function QueueCard({ exercise, queued, handleDelete }: Prop) {
+function QueueCard({ exercise, queued, handleDelete, handleModify }) {
   return (
     <div>
       <div className="bg-white max-w-xl h-full rounded-xl px-10 py-8 mx-auto flex gap-6">
@@ -44,6 +30,7 @@ function QueueCard({ exercise, queued, handleDelete }: Prop) {
               <div
                 className="bg-green-300/30 rounded-full p-1 hover:scale-[1.3] duration-300 tooltip tooltip-success"
                 data-tip="Done"
+                onClick={() => handleModify(exercise._id, true)}
               >
                 <IoCheckmarkDone className="w-7 h-7  text-green-500 " />
               </div>
@@ -53,6 +40,7 @@ function QueueCard({ exercise, queued, handleDelete }: Prop) {
               <div
                 className="bg-primary/20 rounded-full p-1 hover:scale-[1.3] duration-300 tooltip tooltip-secondary"
                 data-tip="Queue"
+                onClick={() => handleModify(exercise._id, false)}
               >
                 <BiAddToQueue className="w-7 h-7" />
               </div>

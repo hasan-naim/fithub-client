@@ -35,7 +35,7 @@ function ExerciseCard({ exerciseData }: Prop) {
 
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/addExercise?email=${user?.email}`,
+        `https://fithub-server.vercel.app/addExercise?email=${user?.email}`,
         dataToSend
       );
 
