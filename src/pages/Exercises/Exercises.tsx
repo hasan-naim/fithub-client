@@ -19,9 +19,7 @@ function Exercises() {
   const { error, data, isLoading, isError } = useQuery({
     queryKey: ["fetchAllExercises"],
     queryFn: async () => {
-      const res = await axios.get(
-        "https://fithub-server.vercel.app/allExercises"
-      );
+      const res = await axios.get("http://localhost:5000/allExercises");
       return res.data;
     },
   });

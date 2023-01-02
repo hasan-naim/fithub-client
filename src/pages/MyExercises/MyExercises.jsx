@@ -12,6 +12,7 @@ import { toast } from "react-hot-toast";
 function MyExercises() {
   const [queuedExercises, setQueuedExercises] = useState([]);
   const [doneExercises, setDoneExercises] = useState([]);
+  const [userAddedData, setUserAddedData] = useState([]);
 
   const { user } = useContext(AuthContext);
 
@@ -19,7 +20,7 @@ function MyExercises() {
     queryKey: ["getUserExercises", user],
     queryFn: async () => {
       const { data } = await axios.get(
-        `https://fithub-server.vercel.app/exercisesByUser?email=${user?.email}`
+        `http://localhost:5000/exercisesByUser?email=${user?.email}`
       );
 
       return data;
@@ -32,15 +33,19 @@ function MyExercises() {
   }, [refetch]);
 
   useEffect(() => {
-    if (data?.result?.length > 0) {
-      const queued = data?.result.filter((el) => el.completed === false);
+    if (userAddedData) {
+      const queued = userAddedData.filter((el) => el.completed === false);
       setQueuedExercises(queued);
-      const done = data?.result.filter((el) => el.completed === true);
+      const done = userAddedData.filter((el) => el.completed === true);
       setDoneExercises(done);
     }
-  }, [data]);
+  }, [userAddedData]);
 
-  console.log(data);
+  useEffect(() => {
+    if (data) {
+      setUserAddedData(data?.result);
+    }
+  }, [data]);
 
   if (isLoading) {
     return (
@@ -71,10 +76,40 @@ function MyExercises() {
   if (data) {
     // [], [{}, {}]
 
+    const handleDelete = (id) => {
+      console.log(id);
+
+      // console.log({ data: data });
+      // const arrAfterDelete = userAddedData.filter((el) => el._id !== id);
+      // console.log(arrAfterDelete);
+      // setUserAddedData(arrAfterDelete);
+
+      axios
+        .delete(
+          `http://localhost:5000/deleteExerciseByUser?id=${id}&email=${user?.email}`
+        )
+        .then((data) => {
+          if (data.data.response === "success") {
+            refetch();
+            toast.success("Deleted Successfully!");
+          }
+        })
+        .catch((err) => {
+          toast.error(err.message);
+          console.log(err);
+        });
+    };
+
     return (
       <main className="mt-12 min-h-screen">
         <section className="container">
           <Heading txt="My Exercises" />
+
+          {userAddedData?.length === 0 && (
+            <h2 className="mt-12 text-2xl lg:text-5xl text-center font-bold text-gray-600">
+              No Data Found. Add Some Exercise to Your List!
+            </h2>
+          )}
           {queuedExercises?.length > 0 ? (
             <>
               {/* queue div */}
@@ -88,8 +123,9 @@ function MyExercises() {
                     return (
                       <QueueCard
                         exercise={exercise}
-                        key={exercise._id}
+                        key={exercise.id}
                         queued={true}
+                        handleDelete={handleDelete}
                       />
                     );
                   })}
@@ -113,7 +149,7 @@ function MyExercises() {
                     return (
                       <QueueCard
                         exercise={exercise}
-                        key={exercise._id}
+                        key={exercise.id}
                         queued={false}
                       />
                     );

@@ -14,9 +14,10 @@ type Prop = {
     target: string;
   };
   queued?: boolean;
+  handleDelete?: any;
 };
 
-function QueueCard({ exercise, queued }: Prop) {
+function QueueCard({ exercise, queued, handleDelete }: Prop) {
   return (
     <div>
       <div className="bg-white max-w-xl h-full rounded-xl px-10 py-8 mx-auto flex gap-6">
@@ -59,8 +60,9 @@ function QueueCard({ exercise, queued }: Prop) {
           )}
           <button>
             <div
-              className="bg-red-300/30 rounded-full p-1 hover:scale-[1.3] duration-300 tooltip tooltip-error"
+              className="bg-red-300/30 rounded-full p-1 hover:scale-[1.3] duration-300 tooltip tooltip-error cursor-pointer"
               data-tip="Delete"
+              onClick={() => handleDelete(exercise._id)}
             >
               <RxCross2 className="w-7 h-7  text-red-500" />
             </div>

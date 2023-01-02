@@ -35,12 +35,14 @@ function ExerciseCard({ exerciseData }: Prop) {
 
     try {
       const { data } = await axios.post(
-        `https://fithub-server.vercel.app/addExercise?email=${user?.email}`,
+        `http://localhost:5000/addExercise?email=${user?.email}`,
         dataToSend
       );
 
       if (data.modifiedCount === 1 || data.insertedId) {
         toast.success("Exercise Added To Your List");
+      } else if (data?.result) {
+        toast.error(data?.result);
       }
     } catch (err: any) {
       console.log(err);
