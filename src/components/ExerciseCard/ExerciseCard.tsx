@@ -28,12 +28,15 @@ function ExerciseCard({ exerciseData }: Prop) {
   const { user }: { user?: User } = useContext(AuthContext);
 
   const handleAddToList = async () => {
-    console.log("clicked", { exerciseData, user });
+    const dataToSend = {
+      ...exerciseData,
+      completed: false,
+    };
 
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/addExercise?email=${user?.email}`,
-        exerciseData
+        `https://fithub-server.vercel.app/addExercise?email=${user?.email}`,
+        dataToSend
       );
 
       if (data.modifiedCount === 1 || data.insertedId) {

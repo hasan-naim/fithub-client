@@ -19,7 +19,9 @@ function Exercises() {
   const { error, data, isLoading, isError } = useQuery({
     queryKey: ["fetchAllExercises"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/allExercises");
+      const res = await axios.get(
+        "https://fithub-server.vercel.app/allExercises"
+      );
       return res.data;
     },
   });
@@ -93,7 +95,7 @@ function Exercises() {
     };
 
     return (
-      <main className="mt-6">
+      <main className="mt-12">
         <div className="container">
           <Heading txt="Exercises" />
           {/* Search Box */}
@@ -102,7 +104,7 @@ function Exercises() {
               <input
                 type="text"
                 placeholder="Search…"
-                className="input input-bordered bg-white w-[300px] font-medium max-w-[100vw]"
+                className="input input-bordered bg-white w-[260px] font-medium max-w-[100vw]"
                 value={searchTxt}
                 onChange={(e) => {
                   setSearchTxt(e.target.value.toLowerCase());

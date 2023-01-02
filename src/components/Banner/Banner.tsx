@@ -7,7 +7,7 @@ import PrimaryButton from "../PrimaryButton/PrimaryButton";
 
 function Banner() {
   return (
-    <section className="mt-6">
+    <section className="mt-12">
       <div className="container">
         <div className="grid gap-12 grid-cols-1 lg:grid-cols-2 ">
           <div className="flex flex-col justify-center lg:justify-center items-center lg:items-start">
