@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import { toast } from "react-hot-toast";
+import NavLinks from "../NavLinks/NavLinks";
 
 type User = {
   photoURL?: string;
@@ -17,23 +18,37 @@ function Navbar() {
   const navItems = (
     <>
       <li>
-        <Link to={"/"}>Home</Link>
+        {/* <Link to={"/"}>Home</Link> */}
+        <Link className="hover:bg-transparent focus:bg-transparent" to={"/"}>
+          <NavLinks txt="Home" />
+        </Link>
       </li>
 
       <li>
-        <Link to={"/exercises"}>Exercises</Link>
+        <Link
+          className="hover:bg-transparent focus:bg-transparent"
+          to={"/exercises"}
+        >
+          <NavLinks txt="Exercises" />
+        </Link>
       </li>
       <li>
-        <Link to={"/myexercises"}>My Exercises</Link>
+        <Link
+          className="hover:bg-transparent focus:bg-transparent"
+          to={"/myexercises"}
+        >
+          <NavLinks txt="My Exercises" />
+        </Link>
       </li>
 
       <li>
         <a
+          className="hover:bg-transparent focus:bg-transparent"
           target={"_blank"}
           rel="noreferrer"
           href="https://hasan-naim.netlify.app/"
         >
-          Portfolio
+          <NavLinks txt="Portfolio" />
         </a>
       </li>
     </>

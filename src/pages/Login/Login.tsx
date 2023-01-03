@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider";
@@ -25,6 +25,8 @@ function Login() {
   const [btnDisable, setBtnDisable] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const cameFrom: string = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -43,7 +45,7 @@ function Login() {
           pass: "",
         });
         setBtnDisable(false);
-        navigate("/");
+        navigate(cameFrom, { replace: true });
 
         toast.success("Successfully Log in.");
       }
@@ -60,7 +62,7 @@ function Login() {
       if (googleLogin) {
         const { user } = await googleLogin();
 
-        navigate("/");
+        navigate(cameFrom, { replace: true });
         setBtnDisable(false);
         toast.success("You are successfully loged in");
       }

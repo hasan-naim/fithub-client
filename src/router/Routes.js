@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import MainLayout from "../Layouts/MainLayout";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Exercises from "../pages/Exercises/Exercises";
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/myexercises",
-        element: <MyExercises></MyExercises>,
+        element: (
+          <PrivateRoute>
+            <MyExercises></MyExercises>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/*",
