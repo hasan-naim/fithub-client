@@ -75,6 +75,8 @@ function Exercises() {
       lastExercise
     );
 
+    console.log(data);
+
     const onPageChange = (prevOrNext: string) => {
       switch (prevOrNext) {
         case "prev":

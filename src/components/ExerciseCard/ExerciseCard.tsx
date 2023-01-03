@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import { BiAddToQueue } from "react-icons/bi";
 import { FaArrowRight } from "react-icons/fa";
@@ -27,7 +27,15 @@ type User = {
 function ExerciseCard({ exerciseData }: Prop) {
   const { user }: { user?: User } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
   const handleAddToList = async () => {
+    if (!user) {
+      toast.error("You have to login first.");
+      navigate("/login");
+      return;
+    }
+
     const dataToSend = {
       ...exerciseData,
       completed: false,
