@@ -54,7 +54,11 @@ function Navbar() {
         <div className="navbar p-0">
           <div className="navbar-start">
             <div className="dropdown">
-              <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <label
+                tabIndex={0}
+                className="btn btn-ghost lg:hidden "
+                style={{ backgroundColor: "#E5E7EB" }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 text-neutral w-5"
@@ -79,9 +83,8 @@ function Navbar() {
             </div>
             <Link
               to={"/"}
-              className="translate-y-0 flex items-center duration-300 h-full ml-3 lg:ml-0 hover:bg-white hover:-translate-y-2 hover:cursor-pointer normal-case text-xl gap-1"
+              className="translate-y-0 flex items-center duration-300 h-full ml-3 lg:ml-0 hover:bg-white md:hover:-translate-y-2 hover:cursor-pointer normal-case text-xl gap-1"
             >
-              {/* <img className="w-6 sm:w-10 mr-2 md:mr-2" src={""} alt="" /> */}
               <span className="sm:text-2xl lg:text-3xl"> 💪 </span>
               <h1 className="text-xl sm:text-2xl cursor-pointer font-black md:text-2xl lg:text-4xl font-sans text-[#282828]">
                 FitHub
