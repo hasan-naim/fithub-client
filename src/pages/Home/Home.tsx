@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Banner from "../../components/Banner/Banner";
 import ExercisesSection from "../../components/ExercisesSection/ExercisesSection";
+import InsturctorSection from "../../components/InsturctorSection/InsturctorSection";
 
 function Home() {
   useEffect(() => {
@@ -11,6 +12,7 @@ function Home() {
     <main>
       <Banner />
       <ExercisesSection />
+      <InsturctorSection />
     </main>
   );
 }

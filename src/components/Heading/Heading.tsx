@@ -1,7 +1,7 @@
 import React from "react";
 
 type prop = {
-  txt: string;
+  txt: string | any;
 };
 
 function Heading({ txt }: prop) {
