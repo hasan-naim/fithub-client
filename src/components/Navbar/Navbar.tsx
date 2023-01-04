@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
@@ -14,6 +14,18 @@ type User = {
 function Navbar() {
   const { user, logOut }: { user?: User; logOut?: Function } =
     useContext(AuthContext);
+
+  const [navbarBg, setNavbarBg] = useState(false);
+
+  const changeNavbarBg = () => {
+    if (window.scrollY > 10) {
+      setNavbarBg(true);
+    } else {
+      setNavbarBg(false);
+    }
+  };
+
+  window.addEventListener("scroll", changeNavbarBg);
 
   const navItems = (
     <>
@@ -64,7 +76,11 @@ function Navbar() {
   };
 
   return (
-    <div className="bg-white sticky top-0 left-0 w-full z-30 shadow-lg">
+    <div
+      className={` bg-white  ${
+        navbarBg ? "shadow-md" : "border-b border-b-gray-300 bg-base-100"
+      } sticky top-0 left-0 w-full z-30 `}
+    >
       <div className="container">
         <div className="navbar p-0">
           <div className="navbar-start">
