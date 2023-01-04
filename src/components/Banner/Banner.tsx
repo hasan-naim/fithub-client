@@ -29,7 +29,10 @@ function Banner() {
               ></PrimaryButton>
             </a>
           </div>
-          <div className="rounded-xl justify-self-center lg:justify-self-end ">
+          <div
+            data-aos="zoom-in"
+            className="rounded-xl justify-self-center lg:justify-self-end "
+          >
             <img
               src={BannerGif}
               alt=""

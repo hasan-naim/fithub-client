@@ -63,7 +63,10 @@ function SignUp() {
     <section>
       <div className="my-24">
         <div className="container">
-          <div className="w-full max-w-lg bg-white rounded-2xl shadow-neumorphismHvr mx-auto p-12">
+          <div
+            className="w-full max-w-lg bg-white rounded-2xl shadow-neumorphismHvr mx-auto p-12"
+            data-aos="zoom-in"
+          >
             <h1 className="text-center text-neutral font-bold text-4xl lg:text-5xl mb-8 font-sans">
               Sign Up
             </h1>

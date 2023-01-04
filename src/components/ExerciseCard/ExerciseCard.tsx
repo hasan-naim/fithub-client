@@ -59,7 +59,10 @@ function ExerciseCard({ exerciseData }: Prop) {
   };
 
   return (
-    <div className="max-w-sm bg-white rounded-2xl shadow-lg hover:shadow-2xl duration-500 hover:-translate-y-2">
+    <div
+      className="max-w-sm bg-white rounded-2xl shadow-lg hover:shadow-2xl duration-500 hover:-translate-y-2"
+      data-aos="zoom-in"
+    >
       <div className="p-3">
         <div className="w-full h-[394px] overflow-hidden rounded-2xl ">
           <img

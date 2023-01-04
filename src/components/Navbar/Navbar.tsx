@@ -114,7 +114,7 @@ function Navbar() {
             </div>
             <Link
               to={"/"}
-              className="translate-y-0 flex items-center duration-300 h-full ml-3 lg:ml-0 hover:bg-white md:hover:-translate-y-2 hover:cursor-pointer normal-case text-xl gap-1"
+              className="translate-y-0 flex items-center duration-300 h-full ml-3 lg:ml-0 hover:bg-transparent md:hover:-translate-y-2 hover:cursor-pointer normal-case text-xl gap-1"
             >
               <span className="sm:text-2xl lg:text-3xl"> 💪 </span>
               <h1 className="text-xl sm:text-2xl cursor-pointer font-black md:text-2xl lg:text-4xl font-sans text-[#282828]">
