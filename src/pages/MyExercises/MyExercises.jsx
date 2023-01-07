@@ -101,14 +101,12 @@ function MyExercises() {
     };
 
     const handleModify = (id, state) => {
-      console.log({ id, state });
-
       axios
         .put(
           `https://fithub-server.vercel.app/updateExerciseState?id=${id}&email=${user?.email}&state=${state}`
         )
         .then((data) => {
-          console.log(data.data);
+          // console.log(data.data);
           if (data.data.response === "true") {
             toast.success("Congratulation!");
           }

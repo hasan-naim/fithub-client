@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import ExerciseCard from "../../components/ExerciseCard/ExerciseCard";
 import Heading from "../../components/Heading/Heading";
 import Loading from "../../components/Loading/Loading";
+import { RootState } from "../../app/store";
+import { useSelector, useDispatch } from "react-redux";
+import { storeData } from "../../app/slicers/fetchedDataSlice";
 
 type ExerciseObject = {
   _id: string;
@@ -16,6 +19,11 @@ type ExerciseObject = {
 };
 
 function Exercises() {
+  const dataFrmStore: ExerciseObject[] = useSelector(
+    (state: RootState) => state.fetchData.data
+  );
+  const dispatch = useDispatch();
+
   const { error, data, isLoading, isError } = useQuery({
     queryKey: ["fetchAllExercises"],
     queryFn: async () => {
@@ -33,6 +41,11 @@ function Exercises() {
   useEffect(() => {
     window.scroll({ top: 0, behavior: "smooth" });
   }, []);
+  useEffect(() => {
+    if (data) {
+      dispatch(storeData(data));
+    }
+  }, [data, dispatch]);
 
   if (isError && error instanceof Error) {
     return (
@@ -56,26 +69,26 @@ function Exercises() {
     );
   }
 
-  if (data) {
+  if (dataFrmStore) {
     const exercisePerPage = 9;
     const lastExercise: number = pageNumber * exercisePerPage;
     const firstExercise: number = lastExercise - exercisePerPage;
 
-    const searchedExercises = data.filter((exercise: ExerciseObject) => {
-      return (
-        exercise.name.toLowerCase().includes(searchTxt) ||
-        exercise.bodyPart.toLowerCase().includes(searchTxt) ||
-        exercise.target.toLowerCase().includes(searchTxt) ||
-        exercise.equipment.toLowerCase().includes(searchTxt)
-      );
-    });
+    const searchedExercises = dataFrmStore.filter(
+      (exercise: ExerciseObject) => {
+        return (
+          exercise.name.toLowerCase().includes(searchTxt) ||
+          exercise.bodyPart.toLowerCase().includes(searchTxt) ||
+          exercise.target.toLowerCase().includes(searchTxt) ||
+          exercise.equipment.toLowerCase().includes(searchTxt)
+        );
+      }
+    );
 
     const exercises: ExerciseObject[] = searchedExercises.slice(
       firstExercise,
       lastExercise
     );
-
-    console.log(data);
 
     const onPageChange = (prevOrNext: string) => {
       switch (prevOrNext) {

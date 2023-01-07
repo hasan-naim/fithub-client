@@ -7,6 +7,8 @@ import { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import AuthProvider from "./Contexts/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import { store } from "./app/store";
+import { Provider } from "react-redux";
 
 const queryClient = new QueryClient();
 
@@ -16,10 +18,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Toaster position="bottom-right" reverseOrder={false} />
-        <App />
-      </AuthProvider>
+      <Provider store={store}>
+        <AuthProvider>
+          <Toaster position="bottom-right" reverseOrder={false} />
+          <App />
+        </AuthProvider>
+      </Provider>
     </QueryClientProvider>
   </React.StrictMode>
 );
